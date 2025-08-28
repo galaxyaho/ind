@@ -6,9 +6,556 @@
 
 <style>
   .coming-soon {
-    font-size: smaller; /* Make the text smaller */
+    font-size: smaller;
     position: relative;
-    top: -5px; /* Adjust vertical position */
+    top: -5px;
+  }
+
+  /* Modern Dark + Light Theme */
+  :root {
+    --primary-dark: #1a1a2e;
+    --secondary-dark: #16213e;
+    --accent-blue: #0f3460;
+    --light-bg: #f8fafc;
+    --white: #ffffff;
+    --text-light: #e2e8f0;
+    --text-dark: #2d3748;
+    --accent-color: #3b82f6;
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-heavy: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  * {
+    transition: all 0.3s ease;
+  }
+
+  body {
+    background: var(--light-bg);
+    color: var(--text-dark);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+  }
+
+  /* Header Styles */
+  .header {
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-medium);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .header .head_text h3 {
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  .header .head_text:hover {
+    transform: translateY(-2px);
+    color: var(--accent-color);
+  }
+
+  .mobile_header {
+    background: var(--primary-dark);
+    box-shadow: var(--shadow-medium);
+  }
+
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 50%, var(--accent-blue) 100%);
+    color: var(--text-light);
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.03)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.04)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+  }
+
+  .hero_text2 {
+    position: relative;
+    z-index: 2;
+    animation: fadeInUp 1s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero_text2 h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, #ffffff 0%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: slideInLeft 1s ease-out 0.3s both;
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .hero_text2 h4 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+    animation: slideInRight 1s ease-out 0.6s both;
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .btn1 {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    margin: 10px;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: var(--shadow-medium);
+    transform: translateY(0);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .btn1:hover::before {
+    left: 100%;
+  }
+
+  .btn1:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-heavy);
+    scale: 1.05;
+  }
+
+  /* Auto-scrolling Image Slider */
+  .website-showcase {
+    background: var(--white);
+    padding: 80px 0;
+    position: relative;
+  }
+
+  .website-showcase h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .website-showcase h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--gradient-primary);
+    border-radius: 2px;
+  }
+
+  .slider-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: var(--shadow-heavy);
+  }
+
+  .slider-wrapper {
+    display: flex;
+    animation: autoSlide 15s infinite linear;
+  }
+
+  .slider-wrapper:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes autoSlide {
+    0% { transform: translateX(0); }
+    33.33% { transform: translateX(-100%); }
+    66.66% { transform: translateX(-200%); }
+    100% { transform: translateX(0); }
+  }
+
+  .slide {
+    min-width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .slide:hover img {
+    transform: scale(1.05);
+  }
+
+  .slide-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+    padding: 40px;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .slide:hover .slide-overlay {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .slide-overlay h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .slide-overlay p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+  }
+
+  /* Dark sections */
+  .row_backimg {
+    background: var(--primary-dark);
+    color: var(--text-light);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .row_backimg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%);
+  }
+
+  .row_backimg > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  .flex_boxin {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 30px;
+    margin: 20px;
+    transition: all 0.3s ease;
+    transform: translateY(0);
+  }
+
+  .flex_boxin:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-heavy);
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .flex_boxin i {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .flex_boxin:hover i {
+    transform: scale(1.2);
+    color: #60a5fa;
+  }
+
+  /* Light sections */
+  .row2 {
+    background: var(--light-bg);
+    color: var(--text-dark);
+  }
+
+  .flex_pricingin {
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: var(--shadow-light);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .flex_pricingin:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-heavy);
+    border-color: var(--accent-color);
+  }
+
+  .temp_preview {
+    background: var(--white);
+    padding: 60px 0;
+  }
+
+  .demo_slider {
+    animation: fadeIn 1s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .temp_pre {
+    transition: all 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow-light);
+  }
+
+  .temp_pre:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: var(--shadow-medium);
+  }
+
+  .temp_pre img {
+    transition: all 0.3s ease;
+  }
+
+  .temp_pre:hover img {
+    transform: scale(1.1);
+  }
+
+  /* Benefits section */
+  .row33 {
+    background: var(--secondary-dark);
+    color: var(--text-light);
+    position: relative;
+  }
+
+  .row33::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(59, 130, 246, 0.1) 50%, transparent 70%);
+  }
+
+  .row33 > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  .benefit_box {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 30px;
+    margin: 20px;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+
+  .benefit_box:hover {
+    transform: translateY(-10px) scale(1.05);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: var(--shadow-heavy);
+  }
+
+  .benefit_box i {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .benefit_box:hover i {
+    transform: rotate(360deg) scale(1.2);
+    color: #60a5fa;
+  }
+
+  /* Features section */
+  .row_features {
+    background: var(--light-bg);
+    color: var(--text-dark);
+  }
+
+  .cont_share_boxes {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: var(--shadow-light);
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--accent-color);
+  }
+
+  .cont_share_boxes:hover {
+    transform: translateX(10px);
+    box-shadow: var(--shadow-medium);
+    border-left-color: #60a5fa;
+  }
+
+  .cont_share_boxes i {
+    color: var(--accent-color);
+    margin-right: 10px;
+    transition: all 0.3s ease;
+  }
+
+  .cont_share_boxes:hover i {
+    transform: scale(1.3);
+    color: #60a5fa;
+  }
+
+  /* Footer */
+  .row_bottom {
+    background: var(--primary-dark);
+    color: var(--text-light);
+  }
+
+  footer {
+    background: #0f172a;
+    color: var(--text-light);
+    text-align: center;
+    padding: 20px;
+  }
+
+  /* Visitors box animation */
+  .visitors_box {
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero_text2 h1 {
+      font-size: 2.5rem;
+    }
+    
+    .hero_text2 h4 {
+      font-size: 1.2rem;
+    }
+    
+    .btn1 {
+      padding: 12px 24px;
+      font-size: 0.9rem;
+    }
+    
+    .slide img {
+      height: 300px;
+    }
+    
+    .website-showcase h2 {
+      font-size: 2rem;
+    }
+    
+    .slide-overlay {
+      padding: 20px;
+    }
+    
+    .slide-overlay h3 {
+      font-size: 1.4rem;
+    }
+  }
+
+  /* Loading animations */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+  }
+
+  .animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--light-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #60a5fa;
   }
 </style>
 
@@ -269,67 +816,34 @@ function closeSearch(){
 <!-------------Category Slider ends--------------------->
 
 
-<div class="social_med_poster">
-
-	 <h2>POSTER MAKER</h2>
-	<div class="containerimg">
-
-	<?php 
-		
-		
-		for($x=5;$x>0;$x--){
-			
-			echo '<div class="poster_img" >';
-			echo '<a href="postermaker/index.php"><img src="postermaker/frames/f'.$x.'.png"  alt="Gallery Image" ></a>';
-			echo '</div>';
-			
-		}
-		
-		?>
-		</div>
-		
-		<h2>Daily Social Media Image</h2>
-	
-	<div class="containerimg">
-
-	<?php 
-		
-		
-		for($x=5;$x>0;$x--){
-			
-			echo '<div class="poster_img" >';
-			echo '<a href="postermaker/index.php"><img src="images/f'.$x.'.png"  alt="Gallery Image" ></a>';
-			echo '</div>';
-			
-		}
-		
-		?>
-		</div>
-		
-	
-		 <h2>Images with your Offer/Product</h2>
-		<div class="containerimg"> 
-		 
-		 <?php 
-		
-		for($x=9;$x>5;$x--){
-			
-			echo '<div class="poster_img" >';
-			echo '<a href="postermaker/index.php"><img src="postermaker/frames/f'.$x.'.png"  alt="Gallery Image" ></a>';
-			echo '</div>';
-			
-		}
-			
-		?>
-		
-
-
-
-</div>
-	
-	
-	
-
+<!-- Website Showcase Slider (Replacing Poster Maker Section) -->
+<div class="website-showcase animate-on-scroll">
+    <h2>Professional Website Solutions</h2>
+    <div class="slider-container">
+        <div class="slider-wrapper">
+            <div class="slide">
+                <img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Instant Website" loading="lazy">
+                <div class="slide-overlay">
+                    <h3>Instant Website Creation</h3>
+                    <p>Get your professional website up and running in minutes with our AI-powered instant website builder.</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Customized Website" loading="lazy">
+                <div class="slide-overlay">
+                    <h3>Fully Customized Websites</h3>
+                    <p>Tailored solutions that perfectly match your brand identity and business requirements.</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="E-commerce Website" loading="lazy">
+                <div class="slide-overlay">
+                    <h3>E-commerce Solutions</h3>
+                    <p>Complete online store setup with payment integration, inventory management, and order tracking.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -338,7 +852,7 @@ function closeSearch(){
 
 
 
-<div class="row row_backimg">
+<div class="row row_backimg animate-on-scroll">
 
 	<h1><span class="bc_bg">Ho</span>w It Works?</h1>
 	
@@ -367,7 +881,7 @@ function closeSearch(){
 </div>
 
 
-<div class="row2" id="business">
+<div class="row2 animate-on-scroll" id="business">
 
 		
 	<div class="flex_pricing">
@@ -487,9 +1001,9 @@ function closeSearch(){
 </div>
 
 
-<h1 class="title_sample" id="card-demo"><span class="bc_bg">D</span>emo Business Card/Mini Website </h1>
+<h1 class="title_sample animate-on-scroll" id="card-demo"><span class="bc_bg">D</span>emo Business Card/Mini Website </h1>
 <p class="sub_title">Click on image to see demo</p>
-<div class="temp_preview">
+<div class="temp_preview animate-on-scroll">
 
 	
 	<div class="demo_slider">
@@ -559,7 +1073,7 @@ function closeSearch(){
 
 <!---------------beneficial for-------------------------->
 
-<div class="row33">
+<div class="row33 animate-on-scroll">
 	<h1><span class="bc_bg">D</span>igital Card is Beneficial for</h1>
 	<p>If you meet your prospective customers in person (one to one meeting) or atleast you do telephonic conversations to market and sell your products or services, then our Digital Business Card will help convey your message in a more strategic way.</p>
 	
@@ -619,7 +1133,7 @@ function closeSearch(){
 </div>
 
 <!---------------beneficial for--------------------->
-<div class="row_features">
+<div class="row_features animate-on-scroll">
 <h1><span class="bc_bg">FE</span>ATURES</h1>
 	<p>One business card, endless possibilities</p>
 	
@@ -735,8 +1249,158 @@ function closeSearch(){
 
 </footer>
 
+<script>
+// Scroll animations
+function animateOnScroll() {
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    
+    elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+            element.classList.add('animated');
+        }
+    });
+}
 
+// Initialize animations on scroll
+window.addEventListener('scroll', animateOnScroll);
+window.addEventListener('load', animateOnScroll);
 
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Add loading animation to buttons
+document.querySelectorAll('.btn1, .btn_1').forEach(button => {
+    button.addEventListener('click', function() {
+        if (!this.classList.contains('loading')) {
+            this.classList.add('loading');
+            setTimeout(() => {
+                this.classList.remove('loading');
+            }, 2000);
+        }
+    });
+});
+
+// Parallax effect for hero section
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+    }
+});
+
+// Enhanced hover effects for cards
+document.querySelectorAll('.benefit_box, .flex_boxin, .flex_pricingin').forEach(card => {
+    card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-10px) scale(1.02)';
+    });
+    
+    card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+    });
+});
+
+// Auto-scroll functionality for slider
+document.addEventListener('DOMContentLoaded', function() {
+    const slider = document.querySelector('.slider-wrapper');
+    if (slider) {
+        // Pause animation on hover
+        slider.addEventListener('mouseenter', function() {
+            this.style.animationPlayState = 'paused';
+        });
+        
+        slider.addEventListener('mouseleave', function() {
+            this.style.animationPlayState = 'running';
+        });
+    }
+});
+
+// Add ripple effect to buttons
+function createRipple(event) {
+    const button = event.currentTarget;
+    const circle = document.createElement('span');
+    const diameter = Math.max(button.clientWidth, button.clientHeight);
+    const radius = diameter / 2;
+    
+    circle.style.width = circle.style.height = `${diameter}px`;
+    circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+    circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+    circle.classList.add('ripple');
+    
+    const ripple = button.getElementsByClassName('ripple')[0];
+    if (ripple) {
+        ripple.remove();
+    }
+    
+    button.appendChild(circle);
+}
+
+// Apply ripple effect to buttons
+document.querySelectorAll('.btn1, .btn_1').forEach(button => {
+    button.addEventListener('click', createRipple);
+});
+
+// Add CSS for ripple effect
+const rippleStyle = document.createElement('style');
+rippleStyle.textContent = `
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.6);
+        transform: scale(0);
+        animation: ripple-animation 0.6s linear;
+        pointer-events: none;
+    }
+    
+    @keyframes ripple-animation {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+    
+    .loading {
+        position: relative;
+        pointer-events: none;
+    }
+    
+    .loading::after {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        margin: auto;
+        border: 2px solid transparent;
+        border-top-color: #ffffff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+`;
+document.head.appendChild(rippleStyle);
+</script>
 
 </body>
 </html>
