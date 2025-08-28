@@ -41,15 +41,69 @@
 
   /* Header Styles */
   .header {
-    background: rgba(26, 26, 46, 0.95);
+    background: rgba(26, 26, 46, 0.98);
     backdrop-filter: blur(10px);
     box-shadow: var(--shadow-medium);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: auto;
+    min-height: 70px;
+    padding: 10px 0;
+  }
+
+  .head_cont {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 5px 10px;
+  }
+
+  .head_logo img {
+    max-height: 50px;
+    width: auto;
+  }
+
+  .search_bar {
+    flex: 1;
+    max-width: 400px;
+    margin: 0 20px;
+  }
+
+  .search_bar input {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 14px;
+  }
+
+  .search_bar input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .search_bar button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
   }
 
   .header .head_text h3 {
     color: var(--text-light);
     font-weight: 500;
+    font-size: 14px;
+    margin: 0;
+    white-space: nowrap;
   }
 
   .header .head_text:hover {
@@ -57,9 +111,72 @@
     color: var(--accent-color);
   }
 
+  .head_text {
+    padding: 8px 12px;
+    margin: 0 5px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .head_text:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
   .mobile_header {
     background: var(--primary-dark);
     box-shadow: var(--shadow-medium);
+  }
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+    height: 60px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+  }
+
+  .mobile_header img {
+    height: 40px;
+    width: auto;
+  }
+
+  /* Dropdown Menus */
+  .drop_down {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--primary-dark);
+    min-width: 200px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-heavy);
+    display: none;
+    z-index: 1002;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .drop_down li {
+    list-style: none;
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .drop_down li:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .drop_down li:last-child {
+    border-bottom: none;
+  }
+
+  .drop_down a {
+    color: var(--text-light);
+    text-decoration: none;
+    display: block;
   }
 
   /* Hero Section */
@@ -71,6 +188,7 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
+    margin-top: 70px;
   }
 
   .hero::before {
@@ -105,10 +223,8 @@
     font-size: 3.5rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, #ffffff 0%, #a78bfa 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     animation: slideInLeft 1s ease-out 0.3s both;
   }
 
@@ -217,24 +333,20 @@
 
   .slider-wrapper {
     display: flex;
-    animation: autoSlide 15s infinite linear;
+    /* Remove auto-scrolling animation */
   }
 
-  .slider-wrapper:hover {
-    animation-play-state: paused;
-  }
-
-  @keyframes autoSlide {
-    0% { transform: translateX(0); }
-    33.33% { transform: translateX(-100%); }
-    66.66% { transform: translateX(-200%); }
-    100% { transform: translateX(0); }
-  }
+  /* Remove auto-slide keyframes */
 
   .slide {
     min-width: 100%;
     position: relative;
     overflow: hidden;
+    display: none;
+  }
+
+  .slide.active {
+    display: block;
   }
 
   .slide img {
@@ -391,6 +503,15 @@
     position: relative;
   }
 
+  .row33 h1 {
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .row33 p {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
   .row33::before {
     content: '';
     position: absolute;
@@ -415,6 +536,15 @@
     margin: 20px;
     transition: all 0.3s ease;
     text-align: center;
+  }
+
+  .benefit_box h3 {
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .benefit_box p {
+    color: rgba(255, 255, 255, 0.8);
   }
 
   .benefit_box:hover {
@@ -493,8 +623,22 @@
 
   /* Responsive Design */
   @media (max-width: 768px) {
+    .header {
+      display: none;
+    }
+
+    .mobile_header {
+      display: flex;
+    }
+
+    .hero {
+      margin-top: 60px;
+      padding: 40px 20px;
+    }
+
     .hero_text2 h1 {
       font-size: 2.5rem;
+      line-height: 1.2;
     }
     
     .hero_text2 h4 {
@@ -504,6 +648,9 @@
     .btn1 {
       padding: 12px 24px;
       font-size: 0.9rem;
+      margin: 5px;
+      display: inline-block;
+      width: auto;
     }
     
     .slide img {
@@ -512,6 +659,7 @@
     
     .website-showcase h2 {
       font-size: 2rem;
+      padding: 0 20px;
     }
     
     .slide-overlay {
@@ -520,6 +668,120 @@
     
     .slide-overlay h3 {
       font-size: 1.4rem;
+    }
+
+    .temp_preview {
+      padding: 40px 10px;
+    }
+
+    .demo_slider {
+      padding: 0 10px;
+    }
+
+    .card_tag {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin: 20px 0 10px 0;
+      text-align: center;
+      background: var(--accent-color);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-left: 10px;
+    }
+
+    .expander_slide {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      padding: 20px 10px;
+    }
+
+    .temp_pre {
+      width: calc(50% - 10px);
+      min-width: 150px;
+      position: relative;
+    }
+
+    .temp_pre img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .new_lab, .new_lab2 {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: #ff4444;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: bold;
+      z-index: 10;
+    }
+
+    .slide_popup_btn {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-color);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .title_sample {
+      font-size: 2rem;
+      text-align: center;
+      margin: 40px 20px 20px 20px;
+      color: var(--text-dark);
+    }
+
+    .sub_title {
+      text-align: center;
+      color: var(--text-dark);
+      margin-bottom: 30px;
+      padding: 0 20px;
+    }
+
+    .benefit_box {
+      margin: 10px;
+      padding: 20px;
+    }
+
+    .flex_boxin {
+      margin: 10px;
+      padding: 20px;
+    }
+
+    .flex_pricingin {
+      margin: 10px;
+      padding: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero_text2 h1 {
+      font-size: 2rem;
+    }
+
+    .temp_pre {
+      width: calc(100% - 20px);
+    }
+
+    .btn1 {
+      display: block;
+      width: calc(100% - 20px);
+      margin: 10px;
+      text-align: center;
     }
   }
 
@@ -1250,6 +1512,14 @@ function closeSearch(){
 </footer>
 
 <script>
+// Simple slider without auto-scroll
+document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.slide');
+    if (slides.length > 0) {
+        slides[0].classList.add('active');
+    }
+});
+
 // Scroll animations
 function animateOnScroll() {
     const elements = document.querySelectorAll('.animate-on-scroll');
@@ -1281,125 +1551,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
-
-// Add loading animation to buttons
-document.querySelectorAll('.btn1, .btn_1').forEach(button => {
-    button.addEventListener('click', function() {
-        if (!this.classList.contains('loading')) {
-            this.classList.add('loading');
-            setTimeout(() => {
-                this.classList.remove('loading');
-            }, 2000);
-        }
-    });
-});
-
-// Parallax effect for hero section
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-    }
-});
-
-// Enhanced hover effects for cards
-document.querySelectorAll('.benefit_box, .flex_boxin, .flex_pricingin').forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-10px) scale(1.02)';
-    });
-    
-    card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0) scale(1)';
-    });
-});
-
-// Auto-scroll functionality for slider
-document.addEventListener('DOMContentLoaded', function() {
-    const slider = document.querySelector('.slider-wrapper');
-    if (slider) {
-        // Pause animation on hover
-        slider.addEventListener('mouseenter', function() {
-            this.style.animationPlayState = 'paused';
-        });
-        
-        slider.addEventListener('mouseleave', function() {
-            this.style.animationPlayState = 'running';
-        });
-    }
-});
-
-// Add ripple effect to buttons
-function createRipple(event) {
-    const button = event.currentTarget;
-    const circle = document.createElement('span');
-    const diameter = Math.max(button.clientWidth, button.clientHeight);
-    const radius = diameter / 2;
-    
-    circle.style.width = circle.style.height = `${diameter}px`;
-    circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
-    circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
-    circle.classList.add('ripple');
-    
-    const ripple = button.getElementsByClassName('ripple')[0];
-    if (ripple) {
-        ripple.remove();
-    }
-    
-    button.appendChild(circle);
-}
-
-// Apply ripple effect to buttons
-document.querySelectorAll('.btn1, .btn_1').forEach(button => {
-    button.addEventListener('click', createRipple);
-});
-
-// Add CSS for ripple effect
-const rippleStyle = document.createElement('style');
-rippleStyle.textContent = `
-    .ripple {
-        position: absolute;
-        border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.6);
-        transform: scale(0);
-        animation: ripple-animation 0.6s linear;
-        pointer-events: none;
-    }
-    
-    @keyframes ripple-animation {
-        to {
-            transform: scale(4);
-            opacity: 0;
-        }
-    }
-    
-    .loading {
-        position: relative;
-        pointer-events: none;
-    }
-    
-    .loading::after {
-        content: '';
-        position: absolute;
-        width: 16px;
-        height: 16px;
-        margin: auto;
-        border: 2px solid transparent;
-        border-top-color: #ffffff;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-    }
-    
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-`;
-document.head.appendChild(rippleStyle);
 </script>
 
 </body>
